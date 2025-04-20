@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔥 Claim Your Free Fire Gift Code Now!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #000 url('https://i.ibb.co/mB7WSHt/fire-bg.gif') no-repeat center;
+      background-size: cover;
+      z-index: 1000;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #content {
+      display: none;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .card {
+      max-width: 420px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      color: #fff;
+      backdrop-filter: blur(10px);
+      border: 2px solid #ff9800;
+      box-shadow: 0 0 30px #ff5722;
+      position: relative;
+    }
+
+    h1 {
+      color: #FFD700;
+      font-size: 1.9rem;
+      text-shadow: 0 0 10px #ffc107;
+    }
+
+    .code {
+      background: #d84315;
+      padding: 15px 25px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: inline-block;
+      animation: glow 2s infinite;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .code:hover {
+      animation: shake 0.4s;
+      animation-iteration-count: infinite;
+      transform: scale(1.1);
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      25% { transform: translate(-1px, -2px) rotate(-1deg); }
+      50% { transform: translate(-3px, 1px) rotate(1deg); }
+      75% { transform: translate(2px, 1px) rotate(0deg); }
+      100% { transform: translate(1px, -1px) rotate(1deg); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px #ff3d00; }
+      50% { box-shadow: 0 0 25px #ff6e40; }
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff9800, #e64a19);
+      padding: 14px 28px;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      box-shadow: 0 0 20px #ff5722;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 40px #ffc107;
+    }
+
+    .rewards span {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      padding: 6px 10px;
+      margin: 4px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px #ffab40;
+    }
+
+    .timer, .live-users {
+      color: #fff176;
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+
+    #claimedMessage {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #00e676;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .explosion {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url('https://i.ibb.co/vjxR47R/explosion.gif') no-repeat center center;
+      background-size: contain;
+      display: none;
+      z-index: 999;
+    }
+
+    .flash {
+      animation: flashbang 0.5s;
+    }
+
+    @keyframes flashbang {
+      0% { background: rgba(255,255,255,0.8); }
+      100% { background: transparent; }
+    }
+
+    @media(max-width: 480px) {
+      .code { font-size: 1.2rem; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loader"></div>
+  <div id="particles-js"></div>
+  <div id="content">
+    <div class="card" id="card">
+      <div class="explosion" id="boom"></div>
+      <h1>🔥 ফ্রি ফায়ার গিফট কোড পেতে ক্লিক করুন!</h1>
+      <div class="code" onclick="copyCode()">FFBBCVQZ4MWA</div>
+      <div class="rewards">
+        <span>🎁 Diamond</span>
+        <span>💥 Gun Skin</span>
+        <span>💃 Emotes</span>
+        <span>🧊 Magic Cube</span>
+      </div>
+      <a href="#" class="btn" onclick="claimGift()">🎯 Claim Now</a>
+      <div class="timer">⏰ অফার শেষ হতে: <span id="countdown">02:00</span></div>
+      <div class="live-users">🟢 লাইভ ইউজার: <span id="users">348</span></div>
+      <div id="claimedMessage">✅ Claimed Successfully!</div>
+    </div>
+  </div>
+
+  <!-- JS Effects -->
+  <script>
+    let time = 120;
+    const countdown = document.getElementById("countdown");
+    const userCount = document.getElementById("users");
+    const card = document.getElementById("card");
+
+    setInterval(() => {
+      let min = Math.floor(time / 60);
+      let sec = time % 60;
+      countdown.textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+      time--;
+      if (time < 0) clearInterval();
+    }, 1000);
+
+    setInterval(() => {
+      let fakeUsers = 340 + Math.floor(Math.random() * 20);
+      userCount.textContent = fakeUsers;
+    }, 3000);
+
+    function copyCode() {
+      navigator.clipboard.writeText("FFBBCVQZ4MWA").then(() => {
+        document.getElementById("claimedMessage").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("claimedMessage").style.display = "none";
+        }, 4000);
+      });
+    }
+
+    function claimGift() {
+      document.body.classList.add("flash");
+      const boom = document.getElementById("boom");
+      boom.style.display = "block";
+      setTimeout(() => {
+        boom.style.display = "none";
+        document.body.classList.remove("flash");
+        copyCode();
+      }, 1500);
+    }
+
+    window.onload = () => {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    };
+  </script>
+
+  <!-- Particles -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60 },
+        "color": { "value": "#ff6f00" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.6 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 140,
+          "color": "#ffa726",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 2 }
+      }
+    });
+  </script>
+</body>
+</html>
